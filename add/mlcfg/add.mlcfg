@@ -1,0 +1,69 @@
+
+module Add_Add_Interface
+  use mach.int.Int
+  use mach.int.UInt32
+  val add [#"../../src/lib.rs" 10 0 10 35] (i : uint32) (j : uint32) : uint32
+    requires {[#"../../src/lib.rs" 8 11 8 39] i <= (1000 : uint32) /\ j <= (1000 : uint32)}
+    ensures { [#"../../src/lib.rs" 9 10 9 25] result = i + j }
+    
+end
+module Add_Add
+  use mach.int.Int
+  use mach.int.UInt32
+  let rec cfg add [#"../../src/lib.rs" 10 0 10 35] [@cfg:stackify] [@cfg:subregion_analysis] (i : uint32) (j : uint32) : uint32
+    requires {[#"../../src/lib.rs" 8 11 8 39] i <= (1000 : uint32) /\ j <= (1000 : uint32)}
+    ensures { [#"../../src/lib.rs" 9 10 9 25] result = i + j }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : uint32;
+  var i_1 : uint32;
+  var j_2 : uint32;
+  var _5 : uint32;
+  var _6 : uint32;
+  {
+    i_1 <- i;
+    j_2 <- j;
+    goto BB0
+  }
+  BB0 {
+    _5 <- i_1;
+    _6 <- j_2;
+    _0 <- ([#"../../src/lib.rs" 11 4 11 9] _5 + _6);
+    return _0
+  }
+  
+end
+module Add_Inc_Interface
+  use mach.int.Int
+  use mach.int.UInt32
+  val inc [#"../../src/lib.rs" 16 0 16 26] (i : uint32) : uint32
+    requires {[#"../../src/lib.rs" 14 11 14 23] i <= (1000 : uint32)}
+    ensures { [#"../../src/lib.rs" 15 10 15 28] result = i + (1 : uint32) }
+    
+end
+module Add_Inc
+  use mach.int.Int
+  use mach.int.UInt32
+  clone Add_Add_Interface as Add0
+  let rec cfg inc [#"../../src/lib.rs" 16 0 16 26] [@cfg:stackify] [@cfg:subregion_analysis] (i : uint32) : uint32
+    requires {[#"../../src/lib.rs" 14 11 14 23] i <= (1000 : uint32)}
+    ensures { [#"../../src/lib.rs" 15 10 15 28] result = i + (1 : uint32) }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : uint32;
+  var i_1 : uint32;
+  var _4 : uint32;
+  {
+    i_1 <- i;
+    goto BB0
+  }
+  BB0 {
+    _4 <- i_1;
+    _0 <- ([#"../../src/lib.rs" 17 4 17 13] Add0.add ([#"../../src/lib.rs" 17 8 17 9] (1 : uint32)) _4);
+    goto BB1
+  }
+  BB1 {
+    return _0
+  }
+  
+end
