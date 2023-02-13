@@ -1,0 +1,71 @@
+
+module Rem_DivRem_Interface
+  use mach.int.Int
+  use mach.int.UInt32
+  val div_rem [#"../../src/lib.rs" 11 0 11 44] (n : uint32) (m : uint32) : (uint32, uint32)
+    requires {[#"../../src/lib.rs" 8 11 8 20] m <> (0 : uint32)}
+    ensures { [#"../../src/lib.rs" 9 10 9 38] (let (a, _) = result in a) * m + (let (_, a) = result in a) = n }
+    ensures { [#"../../src/lib.rs" 10 10 10 22] (let (_, a) = result in a) < m }
+    
+end
+module Rem_DivRem
+  use mach.int.Int
+  use mach.int.UInt32
+  let rec cfg div_rem [#"../../src/lib.rs" 11 0 11 44] [@cfg:stackify] [@cfg:subregion_analysis] (n : uint32) (m : uint32) : (uint32, uint32)
+    requires {[#"../../src/lib.rs" 8 11 8 20] m <> (0 : uint32)}
+    ensures { [#"../../src/lib.rs" 9 10 9 38] (let (a, _) = result in a) * m + (let (_, a) = result in a) = n }
+    ensures { [#"../../src/lib.rs" 10 10 10 22] (let (_, a) = result in a) < m }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : (uint32, uint32);
+  var n_1 : uint32;
+  var m_2 : uint32;
+  var div_6 : uint32;
+  var rem_7 : uint32;
+  var _8 : ();
+  var _10 : ();
+  var _11 : bool;
+  var _12 : uint32;
+  var _13 : uint32;
+  var _14 : uint32;
+  var _15 : ();
+  var _16 : ();
+  var _17 : ();
+  var _18 : uint32;
+  var _19 : uint32;
+  {
+    n_1 <- n;
+    m_2 <- m;
+    goto BB0
+  }
+  BB0 {
+    div_6 <- ([#"../../src/lib.rs" 12 18 12 19] (0 : uint32));
+    rem_7 <- n_1;
+    goto BB1
+  }
+  BB1 {
+    invariant inv { [#"../../src/lib.rs" 14 50 14 68] div_6 * m_2 + rem_7 = n_1 };
+    _12 <- rem_7;
+    _13 <- m_2;
+    _11 <- ([#"../../src/lib.rs" 15 10 15 18] _12 >= _13);
+    switch (_11)
+      | False -> goto BB3
+      | True -> goto BB2
+      end
+  }
+  BB2 {
+    _14 <- m_2;
+    rem_7 <- ([#"../../src/lib.rs" 16 8 16 16] rem_7 - _14);
+    div_6 <- ([#"../../src/lib.rs" 17 8 17 16] div_6 + ([#"../../src/lib.rs" 17 15 17 16] (1 : uint32)));
+    _10 <- ();
+    goto BB1
+  }
+  BB3 {
+    _8 <- ();
+    _18 <- div_6;
+    _19 <- rem_7;
+    _0 <- (_18, _19);
+    return _0
+  }
+  
+end
