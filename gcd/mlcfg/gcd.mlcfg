@@ -1,0 +1,374 @@
+
+module Gcd_Divide_Stub
+  use mach.int.Int
+  predicate divide [#"../../src/lib.rs" 9 0 9 33] (n : int) (d : int)
+end
+module Gcd_Divide_Interface
+  use mach.int.Int
+  predicate divide [#"../../src/lib.rs" 9 0 9 33] (n : int) (d : int)
+end
+module Gcd_Divide
+  use mach.int.Int
+  predicate divide [#"../../src/lib.rs" 9 0 9 33] (n : int) (d : int) =
+    [#"../../src/lib.rs" 10 4 10 45] exists q : int . n = q * d
+  val divide [#"../../src/lib.rs" 9 0 9 33] (n : int) (d : int) : bool
+    ensures { result = divide n d }
+    
+end
+module Gcd_IsCommonDivisor_Stub
+  use mach.int.Int
+  predicate is_common_divisor [#"../../src/lib.rs" 14 0 14 52] (a : int) (b : int) (d : int)
+end
+module Gcd_IsCommonDivisor_Interface
+  use mach.int.Int
+  predicate is_common_divisor [#"../../src/lib.rs" 14 0 14 52] (a : int) (b : int) (d : int)
+end
+module Gcd_IsCommonDivisor
+  use mach.int.Int
+  clone Gcd_Divide_Stub as Divide0
+  predicate is_common_divisor [#"../../src/lib.rs" 14 0 14 52] (a : int) (b : int) (d : int) =
+    [#"../../src/lib.rs" 15 4 15 42] d <> 0 /\ Divide0.divide a d /\ Divide0.divide b d
+  val is_common_divisor [#"../../src/lib.rs" 14 0 14 52] (a : int) (b : int) (d : int) : bool
+    ensures { result = is_common_divisor a b d }
+    
+end
+module Gcd_LemmaDivideAdd_Stub
+  use mach.int.Int
+  clone Gcd_Divide_Stub as Divide0
+  function lemma_divide_add [#"../../src/lib.rs" 22 0 22 21] (_1' : ()) : ()
+end
+module Gcd_LemmaDivideAdd_Interface
+  use mach.int.Int
+  clone Gcd_Divide_Stub as Divide0
+  function lemma_divide_add [#"../../src/lib.rs" 22 0 22 21] (_1' : ()) : ()
+  axiom lemma_divide_add_spec : forall _1' : () . [#"../../src/lib.rs" 19 0 21 67] forall d : int . forall q : int . forall p : int . d <> 0 -> Divide0.divide p d -> Divide0.divide q d -> Divide0.divide (p + q) d
+end
+module Gcd_LemmaDivideAdd
+  use mach.int.Int
+  clone Gcd_Divide_Stub as Divide0
+  function lemma_divide_add [#"../../src/lib.rs" 22 0 22 21] (_1' : ()) : () =
+    [#"../../src/lib.rs" 18 0 18 8] ()
+  val lemma_divide_add [#"../../src/lib.rs" 22 0 22 21] (_1' : ()) : ()
+    ensures { result = lemma_divide_add _1' }
+    
+  axiom lemma_divide_add_spec : forall _1' : () . [#"../../src/lib.rs" 19 0 21 67] forall d : int . forall q : int . forall p : int . d <> 0 -> Divide0.divide p d -> Divide0.divide q d -> Divide0.divide (p + q) d
+end
+module Gcd_LemmaDivideAdd_Impl
+  use mach.int.Int
+  clone Gcd_Divide as Divide0
+  let rec ghost function lemma_divide_add [#"../../src/lib.rs" 22 0 22 21] (_1' : ()) : ()
+    ensures { [#"../../src/lib.rs" 19 0 21 67] forall d : int . forall q : int . forall p : int . d <> 0 -> Divide0.divide p d -> Divide0.divide q d -> Divide0.divide (p + q) d }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    [#"../../src/lib.rs" 18 0 18 8] ()
+end
+module Gcd_LemmaDivideSub_Stub
+  use mach.int.Int
+  clone Gcd_Divide_Stub as Divide0
+  function lemma_divide_sub [#"../../src/lib.rs" 28 0 28 21] (_1' : ()) : ()
+end
+module Gcd_LemmaDivideSub_Interface
+  use mach.int.Int
+  clone Gcd_Divide_Stub as Divide0
+  function lemma_divide_sub [#"../../src/lib.rs" 28 0 28 21] (_1' : ()) : ()
+  axiom lemma_divide_sub_spec : forall _1' : () . [#"../../src/lib.rs" 25 0 27 67] forall d : int . forall q : int . forall p : int . d <> 0 -> Divide0.divide p d -> Divide0.divide q d -> Divide0.divide (p - q) d
+end
+module Gcd_LemmaDivideSub
+  use mach.int.Int
+  clone Gcd_Divide_Stub as Divide0
+  function lemma_divide_sub [#"../../src/lib.rs" 28 0 28 21] (_1' : ()) : () =
+    [#"../../src/lib.rs" 24 0 24 8] ()
+  val lemma_divide_sub [#"../../src/lib.rs" 28 0 28 21] (_1' : ()) : ()
+    ensures { result = lemma_divide_sub _1' }
+    
+  axiom lemma_divide_sub_spec : forall _1' : () . [#"../../src/lib.rs" 25 0 27 67] forall d : int . forall q : int . forall p : int . d <> 0 -> Divide0.divide p d -> Divide0.divide q d -> Divide0.divide (p - q) d
+end
+module Gcd_LemmaDivideSub_Impl
+  use mach.int.Int
+  clone Gcd_Divide as Divide0
+  let rec ghost function lemma_divide_sub [#"../../src/lib.rs" 28 0 28 21] (_1' : ()) : ()
+    ensures { [#"../../src/lib.rs" 25 0 27 67] forall d : int . forall q : int . forall p : int . d <> 0 -> Divide0.divide p d -> Divide0.divide q d -> Divide0.divide (p - q) d }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    [#"../../src/lib.rs" 24 0 24 8] ()
+end
+module Gcd_LemmaDivideMult_Stub
+  use mach.int.Int
+  clone Gcd_Divide_Stub as Divide0
+  function lemma_divide_mult [#"../../src/lib.rs" 34 0 34 22] (_1' : ()) : ()
+end
+module Gcd_LemmaDivideMult_Interface
+  use mach.int.Int
+  clone Gcd_Divide_Stub as Divide0
+  function lemma_divide_mult [#"../../src/lib.rs" 34 0 34 22] (_1' : ()) : ()
+  axiom lemma_divide_mult_spec : forall _1' : () . [#"../../src/lib.rs" 31 0 33 50] forall d : int . forall q : int . forall p : int . d <> 0 -> Divide0.divide q d -> Divide0.divide (p * q) d
+end
+module Gcd_LemmaDivideMult
+  use mach.int.Int
+  clone Gcd_Divide_Stub as Divide0
+  function lemma_divide_mult [#"../../src/lib.rs" 34 0 34 22] (_1' : ()) : () =
+    [#"../../src/lib.rs" 30 0 30 8] ()
+  val lemma_divide_mult [#"../../src/lib.rs" 34 0 34 22] (_1' : ()) : ()
+    ensures { result = lemma_divide_mult _1' }
+    
+  axiom lemma_divide_mult_spec : forall _1' : () . [#"../../src/lib.rs" 31 0 33 50] forall d : int . forall q : int . forall p : int . d <> 0 -> Divide0.divide q d -> Divide0.divide (p * q) d
+end
+module Gcd_LemmaDivideMult_Impl
+  use mach.int.Int
+  clone Gcd_Divide as Divide0
+  let rec ghost function lemma_divide_mult [#"../../src/lib.rs" 34 0 34 22] (_1' : ()) : ()
+    ensures { [#"../../src/lib.rs" 31 0 33 50] forall d : int . forall q : int . forall p : int . d <> 0 -> Divide0.divide q d -> Divide0.divide (p * q) d }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+    [#"../../src/lib.rs" 30 0 30 8] ()
+end
+module Core_Mem_Swap_Interface
+  type t
+  use prelude.Borrow
+  val swap (x : borrowed t) (y : borrowed t) : ()
+    ensures {  ^ x =  * y }
+    ensures {  ^ y =  * x }
+    
+end
+module CreusotContracts_Resolve_Resolve_Resolve_Stub
+  type self
+  predicate resolve (self : self)
+end
+module CreusotContracts_Resolve_Resolve_Resolve_Interface
+  type self
+  predicate resolve (self : self)
+end
+module CreusotContracts_Resolve_Resolve_Resolve
+  type self
+  predicate resolve (self : self)
+  val resolve (self : self) : bool
+    ensures { result = resolve self }
+    
+end
+module CreusotContracts_Resolve_Impl0_Resolve_Stub
+  type t1
+  type t2
+  predicate resolve (self : (t1, t2))
+end
+module CreusotContracts_Resolve_Impl0_Resolve_Interface
+  type t1
+  type t2
+  predicate resolve (self : (t1, t2))
+end
+module CreusotContracts_Resolve_Impl0_Resolve
+  type t1
+  type t2
+  clone CreusotContracts_Resolve_Resolve_Resolve_Stub as Resolve1 with
+    type self = t2
+  clone CreusotContracts_Resolve_Resolve_Resolve_Stub as Resolve0 with
+    type self = t1
+  predicate resolve (self : (t1, t2)) =
+    Resolve0.resolve (let (a, _) = self in a) /\ Resolve1.resolve (let (_, a) = self in a)
+  val resolve (self : (t1, t2)) : bool
+    ensures { result = resolve self }
+    
+end
+module CreusotContracts_Resolve_Impl1_Resolve_Stub
+  type t
+  use prelude.Borrow
+  predicate resolve (self : borrowed t)
+end
+module CreusotContracts_Resolve_Impl1_Resolve_Interface
+  type t
+  use prelude.Borrow
+  predicate resolve (self : borrowed t)
+end
+module CreusotContracts_Resolve_Impl1_Resolve
+  type t
+  use prelude.Borrow
+  predicate resolve (self : borrowed t) =
+     ^ self =  * self
+  val resolve (self : borrowed t) : bool
+    ensures { result = resolve self }
+    
+end
+module CreusotContracts_Resolve_Impl2_Resolve_Stub
+  type t
+  predicate resolve (self : t)
+end
+module CreusotContracts_Resolve_Impl2_Resolve_Interface
+  type t
+  predicate resolve (self : t)
+end
+module CreusotContracts_Resolve_Impl2_Resolve
+  type t
+  predicate resolve (self : t) =
+    true
+  val resolve (self : t) : bool
+    ensures { result = resolve self }
+    
+end
+module Gcd_Gcd_Interface
+  use mach.int.UInt64
+  use mach.int.Int
+  clone Gcd_Divide_Stub as Divide0
+  clone Gcd_IsCommonDivisor_Stub as IsCommonDivisor0
+  val gcd [#"../../src/lib.rs" 39 0 39 33] (a : uint64) (b : uint64) : uint64
+    requires {[#"../../src/lib.rs" 36 11 36 29] UInt64.to_int a <> 0 /\ UInt64.to_int b <> 0}
+    ensures { [#"../../src/lib.rs" 37 10 37 44] IsCommonDivisor0.is_common_divisor (UInt64.to_int a) (UInt64.to_int b) (UInt64.to_int result) }
+    ensures { [#"../../src/lib.rs" 38 0 38 79] forall d : uint64 . IsCommonDivisor0.is_common_divisor (UInt64.to_int a) (UInt64.to_int b) (UInt64.to_int d) -> Divide0.divide (UInt64.to_int result) (UInt64.to_int d) }
+    
+end
+module Gcd_Gcd
+  use mach.int.Int
+  use mach.int.UInt64
+  use prelude.Borrow
+  clone CreusotContracts_Resolve_Impl2_Resolve as Resolve2 with
+    type t = uint64
+  clone CreusotContracts_Resolve_Impl1_Resolve as Resolve1 with
+    type t = uint64
+  clone Core_Mem_Swap_Interface as Swap0 with
+    type t = uint64
+  clone Gcd_Divide as Divide0
+  clone Gcd_LemmaDivideMult as LemmaDivideMult0 with
+    predicate Divide0.divide = Divide0.divide,
+    axiom .
+  clone Gcd_LemmaDivideSub as LemmaDivideSub0 with
+    predicate Divide0.divide = Divide0.divide,
+    axiom .
+  clone Gcd_LemmaDivideAdd as LemmaDivideAdd0 with
+    predicate Divide0.divide = Divide0.divide,
+    axiom .
+  clone CreusotContracts_Resolve_Impl0_Resolve as Resolve0 with
+    type t1 = uint64,
+    type t2 = uint64,
+    predicate Resolve0.resolve = Resolve2.resolve,
+    predicate Resolve1.resolve = Resolve2.resolve
+  clone Gcd_IsCommonDivisor as IsCommonDivisor0 with
+    predicate Divide0.divide = Divide0.divide
+  let rec cfg gcd [#"../../src/lib.rs" 39 0 39 33] [@cfg:stackify] [@cfg:subregion_analysis] (a : uint64) (b : uint64) : uint64
+    requires {[#"../../src/lib.rs" 36 11 36 29] UInt64.to_int a <> 0 /\ UInt64.to_int b <> 0}
+    ensures { [#"../../src/lib.rs" 37 10 37 44] IsCommonDivisor0.is_common_divisor (UInt64.to_int a) (UInt64.to_int b) (UInt64.to_int result) }
+    ensures { [#"../../src/lib.rs" 38 0 38 79] forall d : uint64 . IsCommonDivisor0.is_common_divisor (UInt64.to_int a) (UInt64.to_int b) (UInt64.to_int d) -> Divide0.divide (UInt64.to_int result) (UInt64.to_int d) }
+    
+   = [@vc:do_not_keep_trace] [@vc:sp]
+  var _0 : uint64;
+  var a_1 : uint64;
+  var b_2 : uint64;
+  var x_6 : uint64;
+  var y_7 : uint64;
+  var _8 : (uint64, uint64);
+  var _9 : bool;
+  var _10 : uint64;
+  var _11 : uint64;
+  var _12 : uint64;
+  var _13 : uint64;
+  var _14 : uint64;
+  var _15 : uint64;
+  var _16 : ();
+  var _20 : ();
+  var _21 : bool;
+  var _22 : uint64;
+  var _23 : ();
+  var _25 : ();
+  var _27 : ();
+  var _29 : ();
+  var _31 : ();
+  var _33 : ();
+  var _35 : uint64;
+  var _36 : uint64;
+  var _37 : bool;
+  var _38 : ();
+  var _39 : borrowed uint64;
+  var _40 : borrowed uint64;
+  var _41 : borrowed uint64;
+  var _42 : borrowed uint64;
+  var _43 : ();
+  var _44 : ();
+  var _45 : ();
+  var _46 : ();
+  {
+    a_1 <- a;
+    b_2 <- b;
+    goto BB0
+  }
+  BB0 {
+    _10 <- a_1;
+    _11 <- b_2;
+    _9 <- ([#"../../src/lib.rs" 40 28 40 33] _10 < _11);
+    switch (_9)
+      | False -> goto BB2
+      | True -> goto BB1
+      end
+  }
+  BB1 {
+    _12 <- a_1;
+    _13 <- b_2;
+    _8 <- (_12, _13);
+    goto BB3
+  }
+  BB2 {
+    _14 <- b_2;
+    _15 <- a_1;
+    _8 <- (_14, _15);
+    goto BB3
+  }
+  BB3 {
+    x_6 <- (let (a, _) = _8 in a);
+    y_7 <- (let (_, a) = _8 in a);
+    assume { Resolve0.resolve _8 };
+    goto BB4
+  }
+  BB4 {
+    invariant cd { [#"../../src/lib.rs" 42 4 42 96] forall d : int . IsCommonDivisor0.is_common_divisor (UInt64.to_int x_6) (UInt64.to_int y_7) d = IsCommonDivisor0.is_common_divisor (UInt64.to_int a_1) (UInt64.to_int b_2) d };
+    invariant le_xy { [#"../../src/lib.rs" 43 23 43 31] UInt64.to_int x_6 <= UInt64.to_int y_7 };
+    invariant y_pos { [#"../../src/lib.rs" 44 23 44 29] 0 < UInt64.to_int y_7 };
+    _22 <- x_6;
+    _21 <- ([#"../../src/lib.rs" 45 10 45 16] _22 <> ([#"../../src/lib.rs" 45 15 45 16] (0 : uint64)));
+    switch (_21)
+      | False -> goto BB8
+      | True -> goto BB5
+      end
+  }
+  BB5 {
+    assert { [#"../../src/lib.rs" 46 22 46 40] let _ = LemmaDivideAdd0.lemma_divide_add () in true };
+    _23 <- ();
+    assert { [#"../../src/lib.rs" 47 22 47 40] let _ = LemmaDivideSub0.lemma_divide_sub () in true };
+    _25 <- ();
+    assert { [#"../../src/lib.rs" 48 22 48 41] let _ = LemmaDivideMult0.lemma_divide_mult () in true };
+    _27 <- ();
+    assert { [#"../../src/lib.rs" 50 8 50 89] forall d : int . IsCommonDivisor0.is_common_divisor (UInt64.to_int x_6) (mod (UInt64.to_int y_7) (UInt64.to_int x_6)) d -> Divide0.divide (UInt64.to_int y_7) d };
+    _29 <- ();
+    assert { [#"../../src/lib.rs" 51 22 51 53] mod (UInt64.to_int y_7) (UInt64.to_int x_6) = UInt64.to_int y_7 - div (UInt64.to_int y_7) (UInt64.to_int x_6) * UInt64.to_int x_6 };
+    _31 <- ();
+    assert { [#"../../src/lib.rs" 52 8 53 79] forall d : int . IsCommonDivisor0.is_common_divisor (UInt64.to_int x_6) (UInt64.to_int y_7) d -> Divide0.divide (mod (UInt64.to_int y_7) (UInt64.to_int x_6)) d };
+    _33 <- ();
+    _35 <- y_7;
+    _36 <- x_6;
+    _37 <- ([#"../../src/lib.rs" 54 12 54 17] _36 = ([#"../../src/lib.rs" 54 12 54 17] (0 : uint64)));
+    assert { [#"../../src/lib.rs" 54 12 54 17] not _37 };
+    goto BB6
+  }
+  BB6 {
+    y_7 <- ([#"../../src/lib.rs" 54 8 54 17] _35 % _36);
+    _40 <- borrow_mut x_6;
+    x_6 <-  ^ _40;
+    _39 <- borrow_mut ( * _40);
+    _40 <- { _40 with current = ( ^ _39) };
+    _42 <- borrow_mut y_7;
+    y_7 <-  ^ _42;
+    _41 <- borrow_mut ( * _42);
+    _42 <- { _42 with current = ( ^ _41) };
+    _38 <- ([#"../../src/lib.rs" 55 8 55 38] Swap0.swap _39 _41);
+    goto BB7
+  }
+  BB7 {
+    assume { Resolve1.resolve _40 };
+    assume { Resolve1.resolve _42 };
+    _20 <- ();
+    goto BB4
+  }
+  BB8 {
+    _16 <- ();
+    assert { [#"../../src/lib.rs" 58 18 58 47] IsCommonDivisor0.is_common_divisor (UInt64.to_int x_6) (UInt64.to_int y_7) (UInt64.to_int y_7) };
+    _46 <- ();
+    _0 <- y_7;
+    return _0
+  }
+  
+end
